@@ -8,13 +8,21 @@ body {
 
 h1 {
     color: antiquewhite;
-    font-family: "Comic Sans MS";
+    font-family: Carlito;
     font-size: 2vw;
 }
 
-p {
+p, .info {
     font-family: Carlito;
     font-size: 2vw;
+}
+
+.info {
+    color: antiquewhite;
+}
+
+.winner {
+    color: green;
 }
 
 .case {
