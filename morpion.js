@@ -5,6 +5,7 @@
     class MonDamier {
         static finished = false;
         static winner = undefined;
+        static turns = 0;
         constructor() {
             this.secondPlayer = false;
             this.filledBoxes = [[], [], []];
@@ -18,13 +19,18 @@
         }
 
         checkVictory () {
-            if ((this.horizontalCheck() || this.verticalCheck()) || this.diagonalCheck()) {
-                let winInfo;
+            let winInfo;
+            if (MonDamier.turns === 9) {
+                winInfo = "<p class=\"winner\"> IT'S A DRAW !</p>";
+            }
+            else if ((this.horizontalCheck() || this.verticalCheck()) || this.diagonalCheck()) {
                 if (MonDamier.winner === "J1") {
                     winInfo = "<p class=\"winner\"> CROSS PLAYER WON !</p>";
                 } else {
                     winInfo = "<p class=\"winner\"> CIRCLE PLAYER WON !</p>";
                 }
+            }
+            if (winInfo) {
                 $('body').append($('<p class="info"> PRESS F5 TO PLAY AGAIN </p>')).append($(winInfo));
             }
         }
@@ -81,6 +87,7 @@
                             .click(function () {
                                 if ($(this).data('clicked')) return;
                                 if (MonDamier.finished) return;
+                                MonDamier.turns++;
                                 $(this).html($(this).data('parent').tick($(this)));
                                 $(this).data('clicked', !($(this).data('clicked')));
                                 $(this).data('parent').checkVictory();
